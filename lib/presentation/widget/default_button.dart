@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pegadaian_digital/helpers/colors_custom.dart';
 
 class DefaultButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -30,7 +31,7 @@ class DefaultButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          backgroundColor: colorScheme.secondary,
+          backgroundColor: ColorsCustom.primary,
           disabledBackgroundColor: colorScheme.outline,
           elevation: elevation),
       child: Padding(

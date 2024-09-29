@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pegadaian_digital/helpers/colors_custom.dart';
 
 class DefaultTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -10,18 +11,19 @@ class DefaultTextField extends StatelessWidget {
   final bool enabled;
   final bool error;
   final String errorText;
+  final IconData? icon;
 
-  const DefaultTextField({
-    super.key,
-    required this.textEditingController,
-    required this.onChanged,
-    required this.hintText,
-    this.onSubmitted,
-    this.textInputAction = TextInputAction.done,
-    this.enabled = true,
-    this.error = false,
-    this.errorText = "",
-  });
+  const DefaultTextField(
+      {super.key,
+      required this.textEditingController,
+      required this.onChanged,
+      required this.hintText,
+      this.onSubmitted,
+      this.textInputAction = TextInputAction.done,
+      this.enabled = true,
+      this.error = false,
+      this.errorText = "",
+      this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +33,16 @@ class DefaultTextField extends StatelessWidget {
     InputDecoration ok() {
       return InputDecoration(
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: colorScheme.outline),
+          borderSide: BorderSide(color: ColorsCustom.borderSoft),
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
         focusColor: colorScheme.onSurface,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: colorScheme.secondary),
+          borderSide: BorderSide(color: ColorsCustom.border),
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
         filled: true,
-        fillColor: colorScheme.surfaceVariant,
+        fillColor: ColorsCustom.white,
         hintText: hintText,
         hintStyle: themeData.textTheme.bodyMedium?.copyWith(
           color: colorScheme.outline,
@@ -50,6 +52,13 @@ class DefaultTextField extends StatelessWidget {
           vertical: 12,
         ),
         isDense: true,
+        prefixIcon: icon != null
+            ? Icon(
+                icon,
+                color: ColorsCustom.black,
+                size: 24,
+              )
+            : null,
       );
     }
 
@@ -65,6 +74,12 @@ class DefaultTextField extends StatelessWidget {
         hintStyle: themeData.textTheme.bodyMedium?.copyWith(
           color: colorScheme.outline,
         ),
+        prefixIcon: icon != null
+            ? Icon(
+                icon,
+                color: colorScheme.onSurface,
+              )
+            : null,
         contentPadding: EdgeInsets.symmetric(
           horizontal: 8,
           vertical: 12,

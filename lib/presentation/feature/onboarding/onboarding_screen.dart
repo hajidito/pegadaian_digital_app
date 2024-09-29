@@ -124,7 +124,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         key: introKey,
         globalBackgroundColor: Colors.white,
         allowImplicitScrolling: true,
-        autoScrollDuration: 3000,
+        autoScrollDuration: 4000,
         pages: pages,
         onDone: () {},
         onSkip: () {}, // You can override onSkip callback

@@ -29,9 +29,11 @@ class _MainAppState extends State<MainApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
+        scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           elevation: 0,
+          centerTitle: false,
           iconTheme: IconThemeData(color: ColorsCustom.primary),
           titleTextStyle: TextStyle(
               color: ColorsCustom.black,

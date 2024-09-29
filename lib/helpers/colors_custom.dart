@@ -21,6 +21,7 @@ class ColorsCustom {
   static Color secondaryText = const Color(0xFF696974);
   static Color softGrey = const Color(0xFFE8E8E8);
   static Color border = const Color(0xFFBBBDC0);
+  static Color borderSoft = const Color(0xFFEEEEEF);
   static Color pomegrande = const Color(0xFF9B2828);
   static Color grey = const Color(0xFFAEB5AF);
   static Color yellow = const Color(0xFFFCA132);
