@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
-import './home_view_model.dart';
 
-class HomeView extends HomeViewModel {
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int counter = 0;
+
+  void incrementCounter() {
+    setState(() {
+      counter++;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

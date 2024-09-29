@@ -36,6 +36,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          title: Text("Daftar"),
+        ),
         body: BlocConsumer<RegisterBloc, RegisterState>(
           listener: (context, state) {
             if (state is RegisterLoadingState) {
