@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorsCustom {
   static Color primary = const Color(0xFF00AB4E);
-  static Color primary400 = const Color(0xFF1E792D);
+  static Color primarySoft = const Color(0xFFBBF0D3);
   static Color primaryDark = const Color(0xFF2BA23E);
   static Color disabled = const Color(0xFF7F8C8D);
   static Color disabledText = const Color(0xFF5E5F60);
@@ -16,7 +16,7 @@ class ColorsCustom {
   static Color green = const Color(0xFF16A085);
   static Color blue = const Color(0xFF2980B9);
 
-  static Color greyText = const Color(0xFF454845);
+  static Color greyText = const Color(0xFF58585B);
   static Color generalText = const Color(0xFF101110);
   static Color secondaryText = const Color(0xFF696974);
   static Color softGrey = const Color(0xFFE8E8E8);

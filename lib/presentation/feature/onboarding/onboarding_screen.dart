@@ -201,6 +201,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             //     ),
             //   ),
             // );
+            Navigator.pushNamed(context, "/Login");
           } else {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(

@@ -10,6 +10,7 @@ class DefaultTextField extends StatelessWidget {
   final TextInputAction textInputAction;
   final bool enabled;
   final bool error;
+  final bool password;
   final String errorText;
   final IconData? icon;
 
@@ -20,6 +21,7 @@ class DefaultTextField extends StatelessWidget {
       required this.hintText,
       this.onSubmitted,
       this.textInputAction = TextInputAction.done,
+      this.password = false,
       this.enabled = true,
       this.error = false,
       this.errorText = "",
@@ -101,6 +103,7 @@ class DefaultTextField extends StatelessWidget {
           cursorColor: colorScheme.onSurface,
           decoration: enabled ? ok() : disabled(),
           enabled: enabled,
+          obscureText: password,
         ),
         SizedBox(
           height: 8,

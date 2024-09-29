@@ -25,39 +25,44 @@ class DefaultButton extends StatelessWidget {
     ThemeData themeData = Theme.of(context);
     ColorScheme colorScheme = themeData.colorScheme;
 
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          backgroundColor: ColorsCustom.primary,
-          disabledBackgroundColor: colorScheme.outline,
-          elevation: elevation),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: (isMedium == true)
-              ? 8
-              : (isLarge == true)
-                  ? 16
-                  : 8,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon(
-              colorScheme.onSecondary,
+    return SizedBox(
+      height: 45,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
             ),
-            Text(
-              text,
-              style: themeData.textTheme.labelLarge?.copyWith(
+            backgroundColor: ColorsCustom.primary,
+            disabledBackgroundColor: colorScheme.outline,
+            elevation: elevation),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: (isMedium == true)
+                ? 8
+                : (isLarge == true)
+                    ? 16
+                    : 8,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon(
+                colorScheme.onSecondary,
+              ),
+              Text(
+                text,
+                style: themeData.textTheme.labelLarge?.copyWith(
                   color: (onPressed != null)
                       ? colorScheme.onSecondary
                       : colorScheme.onSurfaceVariant,
-                  fontWeight: FontWeight.w600),
-            ),
-          ],
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
