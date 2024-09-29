@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pegadaian_digital/home_screen.dart';
-import 'package:pegadaian_digital/onboarding_screen.dart';
+import 'package:pegadaian_digital/presentation/feature/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:pegadaian_digital/splash_screen.dart';
+import 'package:pegadaian_digital/injection.dart';
+import 'package:pegadaian_digital/presentation/feature/splash/splash_screen.dart';
 
-void main() {
+import 'injection.dart' as di;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  di.init();
+
+  await getIt.allReady();
+
   runApp(const MyApp());
 }
 
@@ -15,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Pegadaian Digital',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
         useMaterial3: true,
       ),
       home: SplashScreen(),
