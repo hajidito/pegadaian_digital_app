@@ -10,9 +10,9 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: [
             SizedBox(height: 36),
             AspectRatio(
@@ -36,8 +36,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             FilledButton(onPressed: () {}, child: Text("Masuk")),
             SizedBox(height: 24),
           ],
-        ), // This trailing comma makes auto-formatting nicer for build methods.
-      ),
+        ),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
