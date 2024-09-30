@@ -75,7 +75,7 @@ class _MainAppState extends State<MainApp> {
                 builder: (_) {
                   return const Scaffold(
                     body: Center(
-                      child: Text('Page not found :('),
+                      child: Text('Page not found'),
                     ),
                   );
                 },
