@@ -1,14 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
+import 'package:pegadaian_digital/utils/routes.dart';
 
-import '../../../injection.dart';
 import '../../widget/default_button.dart';
 import '../../widget/default_text_field.dart';
-import '../register/bloc/register_bloc.dart';
-import '../register/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -186,22 +183,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     fontSize: 14),
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: 'Daftar',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: ColorsCustom.primary),
-                                      recognizer: TapGestureRecognizer()
-                                        ..onTap = () {
-                                          Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                              builder: (_) => BlocProvider(
-                                                create: (context) =>
-                                                    getIt.get<RegisterBloc>(),
-                                                child: RegisterScreen(),
-                                              ),
-                                            ),
-                                          );
-                                        }),
+                                    text: 'Daftar',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: ColorsCustom.primary),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        Navigator.pushNamed(
+                                            context, Routes.REGISTER);
+                                      },
+                                  ),
                                 ],
                               ),
                             )

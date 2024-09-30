@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pegadaian_digital/presentation/feature/home/home_screen.dart';
-import 'package:pegadaian_digital/presentation/feature/onboarding/onboarding_screen.dart';
+import 'package:pegadaian_digital/utils/routes.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,11 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void checkNavigation() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-          builder: (_) =>
-              isLogin ? const HomeScreen() : const OnboardingScreen()),
-    );
+    String route = (isLogin) ? Routes.HOME : Routes.ONBOARDING;
+    Navigator.pushReplacementNamed(context, route);
   }
 
   @override
