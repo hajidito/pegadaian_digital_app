@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:pegadaian_digital/data/model/request/register_request.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/register/bloc/register_bloc.dart';
 import 'package:pegadaian_digital/presentation/widget/default_button.dart';
 import 'package:pegadaian_digital/presentation/widget/default_password_text_field.dart';
 import 'package:pegadaian_digital/presentation/widget/default_text_field.dart';
+import 'package:pegadaian_digital/presentation/widget/loading_dialog.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -31,11 +31,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool buttonEnabled = false;
 
+  BuildContext? _dialogContext;
+
+  static const successSnackbar = SnackBar(
+    content: Text('Berhasil Mendaftar'),
+  );
+
+  static const failedSnackbar = SnackBar(
+    content: Text('Gagal Mendaftar'),
+  );
+
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
-    ColorScheme colorScheme = themeData.colorScheme;
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -46,25 +53,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         title: Text("Daftar"),
         bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1.0),
-            child: Container(
-              color: ColorsCustom.borderSoft,
-              height: 1.0,
-            )),
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: ColorsCustom.borderSoft,
+            height: 1.0,
+          ),
+        ),
       ),
       body: SafeArea(
         child: BlocConsumer<RegisterBloc, RegisterState>(
           listener: (context, state) {
             if (state is RegisterLoadingState) {
-              Logger().i("register loading");
+              showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (BuildContext context) {
+                  _dialogContext = context;
+                  return PopScope(
+                    canPop: false,
+                    child: LoadingDialog(),
+                  );
+                },
+              );
             }
 
             if (state is RegisterLoadedState) {
-              Logger().i("register loaded");
+              if (_dialogContext != null && _dialogContext!.mounted) {
+                Navigator.pop(_dialogContext!);
+              }
+
+              ScaffoldMessenger.of(context).showSnackBar(successSnackbar);
             }
 
             if (state is RegisterErrorState) {
-              Logger().i("register error");
+              if (_dialogContext != null && _dialogContext!.mounted) {
+                Navigator.pop(_dialogContext!);
+              }
+
+              ScaffoldMessenger.of(context).showSnackBar(failedSnackbar);
             }
           },
           builder: (context, state) {
@@ -97,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Text(
                           'Nama Lengkap',
                           style: TextStyle(
-                            color: colorScheme.onSurface,
+                            color: ColorsCustom.black,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
@@ -119,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Text(
                           'Nomor Handphone',
                           style: TextStyle(
-                            color: colorScheme.onSurface,
+                            color: ColorsCustom.black,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
@@ -141,7 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Text(
                           'Email',
                           style: TextStyle(
-                            color: colorScheme.onSurface,
+                            color: ColorsCustom.black,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
@@ -163,7 +189,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Text(
                           'Kata Sandi',
                           style: TextStyle(
-                            color: colorScheme.onSurface,
+                            color: ColorsCustom.black,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
@@ -177,7 +203,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           },
                           hintText: "Masukkan kata sandi",
                           error: passwordError,
-                          errorText: "kata sandi tidak valid",
+                          errorText: "kata sandi harus lebih dari 5 huruf",
                         ),
                         SizedBox(height: 10),
                         RichText(

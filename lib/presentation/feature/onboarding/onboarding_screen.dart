@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../helpers/colors_custom.dart';
 import '../../../injection.dart';
@@ -60,13 +59,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Flexible(
-            child: Text(title,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  color: ColorsCustom.black,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                )),
+            child: Text(
+              title,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: ColorsCustom.black,
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+              ),
+            ),
           ),
         ],
       ),
@@ -127,7 +128,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         autoScrollDuration: 4000,
         pages: pages,
         onDone: () {},
-        onSkip: () {}, // You can override onSkip callback
+        onSkip: () {},
+        // You can override onSkip callback
         showSkipButton: true,
         skipOrBackFlex: 0,
         nextFlex: 0,
@@ -202,7 +204,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             //   ),
             // );
           } else {
-            Navigator.of(context).pushReplacement(
+            Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => BlocProvider(
                   create: (context) => getIt.get<RegisterBloc>(),

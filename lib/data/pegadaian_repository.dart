@@ -17,6 +17,7 @@ class PegadaianRepository {
     try {
       final response =
           await dio.post("/auth/register", data: registerRequest.toJson());
+      log.e("PegadaianRepository: ${response.data}");
 
       return Right(RegisterResponse.fromJson(response.data));
     } on DioException catch (e) {

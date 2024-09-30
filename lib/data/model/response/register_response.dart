@@ -27,7 +27,6 @@ class RegisterResponse {
 class Data {
   Data({
     required this.userId,
-    required this.updatedAt,
     required this.name,
     required this.email,
     required this.phoneNumber,
@@ -36,7 +35,6 @@ class Data {
   });
 
   final String? userId;
-  final dynamic updatedAt;
   final String? name;
   final String? email;
   final String? phoneNumber;
@@ -46,7 +44,6 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       userId: json["user_id"],
-      updatedAt: json["updated_at"],
       name: json["name"],
       email: json["email"],
       phoneNumber: json["phone_number"],
@@ -57,7 +54,6 @@ class Data {
 
   Map<String, dynamic> toJson() => {
         "user_id": userId,
-        "updated_at": updatedAt,
         "name": name,
         "email": email,
         "phone_number": phoneNumber,

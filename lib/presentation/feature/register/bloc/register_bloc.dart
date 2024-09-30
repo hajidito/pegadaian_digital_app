@@ -18,6 +18,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   void _register(RegisterClickEvent event, Emitter<RegisterState> emit) async {
+    emit(RegisterLoadingState());
+
     final result = await pegadaianRepository.register(event.registerRequest);
     await result.fold(
       (failure) async {
