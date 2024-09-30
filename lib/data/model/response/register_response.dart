@@ -1,43 +1,63 @@
 class RegisterResponse {
   RegisterResponse({
-    String? code,
-    String? message,
-    Data? data,
-  }) {
-    _code = code;
-    _message = message;
-    _data = data;
+    required this.code,
+    required this.message,
+    required this.data,
+  });
+
+  final int? code;
+  final String? message;
+  final Data? data;
+
+  factory RegisterResponse.fromJson(Map<String, dynamic> json) {
+    return RegisterResponse(
+      code: json["code"],
+      message: json["message"],
+      data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    );
   }
 
-  RegisterResponse.fromJson(dynamic json) {
-    _code = json['code'];
-    _message = json['message'];
-    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
-  }
-
-  String? _code;
-  String? _message;
-  Data? _data;
-
-  String? get code => _code;
-
-  String? get message => _message;
-
-  Data? get data => _data;
+  Map<String, dynamic> toJson() => {
+        "code": code,
+        "message": message,
+        "data": data?.toJson(),
+      };
 }
 
 class Data {
   Data({
-    String? token,
-  }) {
-    _token = token;
+    required this.userId,
+    required this.name,
+    required this.email,
+    required this.phoneNumber,
+    required this.password,
+    required this.createdAt,
+  });
+
+  final String? userId;
+  final String? name;
+  final String? email;
+  final String? phoneNumber;
+  final String? password;
+  final int? createdAt;
+
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      userId: json["user_id"],
+      name: json["name"],
+      email: json["email"],
+      phoneNumber: json["phone_number"],
+      password: json["password"],
+      createdAt: json["created_at"],
+    );
   }
 
-  Data.fromJson(dynamic json) {
-    _token = json['token'];
-  }
-
-  String? _token;
-
-  String? get token => _token;
+  Map<String, dynamic> toJson() => {
+        "user_id": userId,
+        "name": name,
+        "email": email,
+        "phone_number": phoneNumber,
+        "password": password,
+        "created_at": createdAt,
+      };
 }
