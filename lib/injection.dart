@@ -5,6 +5,7 @@ import 'package:pegadaian_digital/data/common/base_url.dart';
 import 'package:pegadaian_digital/data/common/dio.dart';
 import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
 import 'package:pegadaian_digital/data/pegadaian_repository.dart';
+import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/register/bloc/register_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,6 +44,14 @@ void initBloc() {
   getIt.registerLazySingleton<RegisterBloc>(
     () => RegisterBloc(
       pegadaianRepository: getIt.get<PegadaianRepository>(),
+      log: getIt.get<Logger>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<LoginBloc>(
+    () => LoginBloc(
+      pegadaianRepository: getIt.get<PegadaianRepository>(),
+      pref: getIt.get<PegadaianPreferences>(),
       log: getIt.get<Logger>(),
     ),
   );

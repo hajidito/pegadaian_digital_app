@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:logger/logger.dart';
+import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
+import 'package:pegadaian_digital/injection.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +18,20 @@ class _HomeScreenState extends State<HomeScreen> {
       counter++;
     });
   }
-  
+
+  Future<void> initLocal() async {
+    PegadaianPreferences pref = getIt.get<PegadaianPreferences>();
+    bool isUserLoggedIn = pref.isUserLoggedIn();
+    String token = pref.getUserToken() ?? "";
+    Logger().d("HOMESCREEN $isUserLoggedIn || $token");
+  }
+
+  @override
+  void initState() {
+    initLocal();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

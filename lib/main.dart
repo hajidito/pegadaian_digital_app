@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/injection.dart';
 import 'package:pegadaian_digital/presentation/feature/home/home_screen.dart';
+import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/login/login_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/onboarding/onboarding_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/register/bloc/register_bloc.dart';
@@ -35,6 +36,9 @@ class _MainAppState extends State<MainApp> {
       providers: [
         BlocProvider<RegisterBloc>(
           create: (BuildContext context) => getIt.get<RegisterBloc>(),
+        ),
+        BlocProvider<LoginBloc>(
+          create: (BuildContext context) => getIt.get<LoginBloc>(),
         ),
       ],
       child: MaterialApp(
