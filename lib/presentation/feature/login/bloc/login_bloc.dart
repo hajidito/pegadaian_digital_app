@@ -19,10 +19,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     required this.pref,
     required this.log,
   }) : super(LoginInitial()) {
-    on<LoginClickEvent>(_register);
+    on<LoginClickEvent>(_login);
   }
 
-  void _register(LoginClickEvent event, Emitter<LoginState> emit) async {
+  void _login(LoginClickEvent event, Emitter<LoginState> emit) async {
     emit(LoginLoadingState());
 
     final result = await pegadaianRepository.login(event.loginRequest);

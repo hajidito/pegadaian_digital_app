@@ -47,6 +47,7 @@ dependencies:
   introduction_screen: ^3.1.14
   logger: ^2.4.0
   permission_handler: ^10.3.0
+  local_auth: ^2.3.0
 
 dev_dependencies:
   flutter_test:

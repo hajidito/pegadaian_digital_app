@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:pegadaian_digital/data/model/request/login_request.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
@@ -20,6 +21,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final LocalAuthentication auth = LocalAuthentication();
+
   TextEditingController emailText = TextEditingController();
   bool emailError = false;
 
@@ -40,10 +43,83 @@ class _LoginScreenState extends State<LoginScreen> {
     content: Text('Gagal Login'),
   );
 
+  static const noBiometricSnackbar = SnackBar(
+    content: Text('Biometric tidak tersedia'),
+  );
+
   void toggleSaveUserID(bool? value) {
     setState(() {
       saveUserID = value!;
     });
+  }
+
+  Future<void> onBiometricClick() async {
+    final List<BiometricType> availableBiometrics =
+        await auth.getAvailableBiometrics();
+
+    if (availableBiometrics.isNotEmpty) {
+      bool authenticated = await auth.authenticate(
+        localizedReason:
+            'Scan your fingerprint (or face or whatever) to authenticate',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
+      );
+
+      if (authenticated) {
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(successSnackbar);
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacementNamed(context, Routes.HOME);
+      }
+    } else {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(noBiometricSnackbar);
+    }
+  }
+
+  void checkButtonEnabled() {
+    if (validateEmail(emailText.text) && passwordText.text.length >= 6) {
+      setState(() {
+        buttonEnabled = true;
+      });
+    } else {
+      setState(() {
+        buttonEnabled = false;
+      });
+    }
+  }
+
+  void checkEmail() {
+    if (validateEmail(emailText.text)) {
+      setState(() {
+        emailError = false;
+      });
+    } else {
+      setState(() {
+        emailError = true;
+      });
+    }
+  }
+
+  void checkPassword() {
+    if (passwordText.text.length >= 6) {
+      setState(() {
+        passwordError = false;
+      });
+    } else {
+      setState(() {
+        passwordError = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    emailText.dispose();
+    passwordText.dispose();
+    super.dispose();
   }
 
   @override
@@ -233,20 +309,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                       text: "Masuk",
                                     ),
                                   ),
-                                  Container(
-                                    height: 45,
-                                    width: 45,
-                                    margin: EdgeInsets.only(left: 10),
-                                    padding: EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: ColorsCustom.white,
-                                      borderRadius: BorderRadius.circular(6),
-                                      border: Border.all(
-                                          color: ColorsCustom.primary,
-                                          width: 1),
+                                  GestureDetector(
+                                    onTap: () => onBiometricClick(),
+                                    child: Container(
+                                      height: 45,
+                                      width: 45,
+                                      margin: EdgeInsets.only(left: 10),
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: ColorsCustom.white,
+                                        borderRadius: BorderRadius.circular(6),
+                                        border: Border.all(
+                                            color: ColorsCustom.primary,
+                                            width: 1),
+                                      ),
+                                      child: SvgPicture.asset(
+                                          "assets/images/svg/ic_biometric.svg"),
                                     ),
-                                    child: SvgPicture.asset(
-                                        "assets/images/svg/ic_biometric.svg"),
                                   )
                                 ],
                               ),
@@ -296,48 +375,5 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       ),
     );
-  }
-
-  void checkButtonEnabled() {
-    if (validateEmail(emailText.text) && passwordText.text.length >= 6) {
-      setState(() {
-        buttonEnabled = true;
-      });
-    } else {
-      setState(() {
-        buttonEnabled = false;
-      });
-    }
-  }
-
-  void checkEmail() {
-    if (validateEmail(emailText.text)) {
-      setState(() {
-        emailError = false;
-      });
-    } else {
-      setState(() {
-        emailError = true;
-      });
-    }
-  }
-
-  void checkPassword() {
-    if (passwordText.text.length >= 6) {
-      setState(() {
-        passwordError = false;
-      });
-    } else {
-      setState(() {
-        passwordError = true;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    emailText.dispose();
-    passwordText.dispose();
-    super.dispose();
   }
 }
