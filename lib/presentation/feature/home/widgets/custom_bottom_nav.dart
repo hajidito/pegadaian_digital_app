@@ -3,7 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 
 class CustomBottomNav extends StatelessWidget {
-  const CustomBottomNav({super.key});
+  const CustomBottomNav({super.key, required this.menu, required this.onTap});
+
+  final List<(String icon, String label, Widget page)> menu;
+  final Function(int) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -17,29 +20,22 @@ class CustomBottomNav extends StatelessWidget {
         ),
       ),
       child: BottomNavigationBar(
+        onTap: onTap,
         type: BottomNavigationBarType.fixed,
         selectedFontSize: 11,
         unselectedFontSize: 11,
         backgroundColor: ColorsCustom.white,
         elevation: 5,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/images/svg/home.svg"),
-            label: 'Beranda',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/images/svg/history.svg"),
-            label: 'Riwayat',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/images/svg/notification.svg"),
-            label: 'Notifikasi',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/images/svg/profile.svg"),
-            label: 'Profile',
-          ),
-        ],
+        items: menu.map((item) {
+          return BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              item.$1,
+              width: 20,
+              height: 20,
+            ),
+            label: item.$2,
+          );
+        }).toList(),
       ),
     );
   }
