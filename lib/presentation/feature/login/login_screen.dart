@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 
 import '../../../injection.dart';
-import '../../widget/default_button.dart';
-import '../../widget/default_text_field.dart';
+import '../../widgets/default_button.dart';
+import '../../widgets/default_text_field.dart';
 import '../register/bloc/register_bloc.dart';
 import '../register/register_screen.dart';
 
@@ -156,7 +156,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               children: [
                                 Expanded(
                                   child: DefaultButton(
-                                    onPressed: () {},
+                                    onPressed: () => Navigator.of(context)
+                                        .pushNamedAndRemoveUntil('/Home',
+                                            (Route<dynamic> route) => false),
                                     text: "Masuk",
                                   ),
                                 ),

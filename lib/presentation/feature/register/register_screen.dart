@@ -4,8 +4,8 @@ import 'package:logger/logger.dart';
 import 'package:pegadaian_digital/data/model/request/register_request.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/register/bloc/register_bloc.dart';
-import 'package:pegadaian_digital/presentation/widget/default_button.dart';
-import 'package:pegadaian_digital/presentation/widget/default_text_field.dart';
+import 'package:pegadaian_digital/presentation/widgets/default_button.dart';
+import 'package:pegadaian_digital/presentation/widgets/default_text_field.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
 
 class RegisterScreen extends StatefulWidget {

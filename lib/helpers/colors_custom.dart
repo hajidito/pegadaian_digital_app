@@ -33,4 +33,5 @@ class ColorsCustom {
   static Color primaryLightBg = const Color(0xFFECFFEF);
   static Color googleBg = const Color(0xFFCF4232);
   static Color fbBg = const Color(0xFF3C66C3);
+  static Color limeBg = const Color(0xFFE6F6EA);
 }
