@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pegadaian_digital/presentation/feature/home/bloc/home_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/custom_bottom_nav.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/gold_menu.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/menu_grid.dart';
@@ -13,14 +15,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(GetUserEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.only(top: 20),
-            children: [TopBar(), GoldMenu(), MenuGrid()],
-          ),
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.only(top: 20),
+          children: [
+            TopBar(),
+            GoldMenu(),
+            MenuGrid(),
+          ],
         ),
-        bottomNavigationBar: CustomBottomNav());
+      ),
+      bottomNavigationBar: CustomBottomNav(),
+    );
   }
 }

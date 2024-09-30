@@ -5,12 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pegadaian_digital/data/model/request/login_request.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
-import 'package:pegadaian_digital/presentation/widget/loading_dialog.dart';
+import 'package:pegadaian_digital/presentation/widgets/default_button.dart';
+import 'package:pegadaian_digital/presentation/widgets/default_text_field.dart';
+import 'package:pegadaian_digital/presentation/widgets/loading_dialog.dart';
 import 'package:pegadaian_digital/utils/routes.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
-
-import '../../widget/default_button.dart';
-import '../../widget/default_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

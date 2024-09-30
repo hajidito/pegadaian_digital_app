@@ -32,8 +32,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       },
       (response) async {
         String token = response.data?.token ?? "";
-        if (token.isNotEmpty) {
+        String userId = response.data?.user?.userId ?? "";
+
+        if (token.isNotEmpty && userId.isNotEmpty) {
           pref.setUserToken(token);
+          pref.setUserId(userId);
           pref.setUserLoggedIn(true);
           emit(LoginLoadedState(loginResponse: response));
         } else {

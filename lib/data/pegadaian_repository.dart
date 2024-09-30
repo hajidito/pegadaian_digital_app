@@ -7,12 +7,16 @@ import 'package:pegadaian_digital/data/model/request/login_request.dart';
 import 'package:pegadaian_digital/data/model/request/register_request.dart';
 import 'package:pegadaian_digital/data/model/response/login_response.dart';
 import 'package:pegadaian_digital/data/model/response/register_response.dart';
+import 'package:pegadaian_digital/data/model/response/user_response.dart';
+import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
 
 class PegadaianRepository {
   final Dio dio;
+  final PegadaianPreferences pref;
   final Logger log;
 
-  PegadaianRepository({required this.dio, required this.log});
+  PegadaianRepository(
+      {required this.dio, required this.pref, required this.log});
 
   Future<Either<Failure, RegisterResponse>> register(
       RegisterRequest registerRequest) async {
@@ -40,6 +44,23 @@ class PegadaianRepository {
       log.d("PegadaianRepository: ${response.data}");
 
       return Right(LoginResponse.fromJson(response.data));
+    } on DioException catch (e) {
+      Failure failure = dioException(e);
+      log.e("PegadaianRepository: ${failure.message}");
+      return Left(failure);
+    } catch (e) {
+      log.e("PegadaianRepository $e");
+      return Left(UnknownFailure(null, null));
+    }
+  }
+
+  Future<Either<Failure, UserResponse>> getUser() async {
+    try {
+      String? userId = pref.getUserId();
+      final response = await dio.get("/auth/users/$userId");
+      log.d("PegadaianRepository: ${response.data}");
+
+      return Right(UserResponse.fromJson(response.data));
     } on DioException catch (e) {
       Failure failure = dioException(e);
       log.e("PegadaianRepository: ${failure.message}");
