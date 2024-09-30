@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart' as geolocator;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:pegadaian_digital/helpers/date_formatter.dart';
 import 'package:permission_handler/permission_handler.dart' as permission;
 
 import '../../../helpers/colors_custom.dart';
@@ -23,8 +24,6 @@ class _AttendanceState extends State<Attendance>
     with SingleTickerProviderStateMixin {
   Completer<GoogleMapController> controller = Completer();
   late GoogleMapController kcontroller;
-
-  final formatTimeSeconds = DateFormat('HH:mm:ss');
 
   TextEditingController searchController = TextEditingController();
 
@@ -47,7 +46,8 @@ class _AttendanceState extends State<Attendance>
   bool searchbar = false;
 
   void _getTime() {
-    final String formattedDateTime = formatTimeSeconds.format(DateTime.now());
+    final String formattedDateTime =
+        CustomDateFormatter.formatLong(DateTime.now());
     if (mounted) {
       setState(() {
         timeString = formattedDateTime;
@@ -120,6 +120,7 @@ class _AttendanceState extends State<Attendance>
   }
 
   Future<void> onSubmitLocation() async {
+    // TODO: implement onSubmitLocation
     String location =
         "${Platform.isIOS ? placemark[0].locality : placemark[0].subAdministrativeArea}, ${placemark[0].country}";
     // Navigator.pushReplacement(
