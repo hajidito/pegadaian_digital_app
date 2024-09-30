@@ -15,24 +15,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool introduction = false;
   bool isLogin = false;
   bool noPermissionLocation = false;
 
   Future<void> checkLocationPermission() async {
-    if (introduction) {
-      if (await Permission.location.request().isGranted) {
-        if (kDebugMode) {
-          print("Permission Granted");
-        }
-      } else {
-        if (kDebugMode) {
-          print("Permission Denied");
-        }
-        setState(() {
-          noPermissionLocation = true;
-        });
+    if (await Permission.location.request().isGranted) {
+      if (kDebugMode) {
+        print("Permission Granted");
       }
+    } else {
+      if (kDebugMode) {
+        print("Permission Denied");
+      }
+      setState(() {
+        noPermissionLocation = true;
+      });
     }
   }
 

@@ -15,12 +15,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.only(top: 20),
-            children: [TopBar(), GoldMenu(), MenuGrid()],
-          ),
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.only(top: 20),
+          children: [TopBar(), GoldMenu(), MenuGrid()],
         ),
-        bottomNavigationBar: CustomBottomNav());
+      ),
+      bottomNavigationBar: CustomBottomNav(),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.of(context).pushNamed('/Attendance');
+      }),
+    );
   }
 }

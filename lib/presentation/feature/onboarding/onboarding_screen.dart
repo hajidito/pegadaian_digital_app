@@ -162,6 +162,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             buttonFooter(label: "Daftar", isBorder: true),
             const SizedBox(height: 10),
             buttonFooter(label: "Masuk"),
+            SizedBox(height: 20),
           ],
         ),
       ),
@@ -203,7 +204,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             // );
             Navigator.pushNamed(context, "/Login");
           } else {
-            Navigator.of(context).pushReplacement(
+            Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => BlocProvider(
                   create: (context) => getIt.get<RegisterBloc>(),

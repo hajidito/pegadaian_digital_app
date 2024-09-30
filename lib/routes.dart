@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pegadaian_digital/presentation/feature/attendance/attendance.dart';
 import 'package:pegadaian_digital/presentation/feature/home/home_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/login/login_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/onboarding/onboarding_screen.dart';
@@ -9,4 +10,5 @@ final Map<String, WidgetBuilder> routes = {
   '/Register': (BuildContext context) => const RegisterScreen(),
   '/Login': (BuildContext context) => const LoginScreen(),
   '/Home': (BuildContext context) => const HomeScreen(),
+  '/Attendance': (BuildContext context) => const Attendance(),
 };
