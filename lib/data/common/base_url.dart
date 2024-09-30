@@ -1,1 +1,1 @@
-const String baseUrl = "https://api1234.co.id";
+const String baseUrl = "https://testing-vercel-henna.vercel.app/api/v1";

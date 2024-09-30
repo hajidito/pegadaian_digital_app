@@ -5,6 +5,7 @@ import 'package:pegadaian_digital/data/model/request/register_request.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/register/bloc/register_bloc.dart';
 import 'package:pegadaian_digital/presentation/widget/default_button.dart';
+import 'package:pegadaian_digital/presentation/widget/default_password_text_field.dart';
 import 'package:pegadaian_digital/presentation/widget/default_text_field.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
 
@@ -106,6 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           textEditingController: nameText,
                           onChanged: (value) {
                             checkButtonEnabled();
+                            checkName();
                           },
                           hintText: "Masukkan nama lengkap",
                           textInputAction: TextInputAction.next,
@@ -124,9 +126,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         SizedBox(height: 5),
                         DefaultTextField(
-                          textEditingController: nameText,
+                          textEditingController: phoneText,
                           onChanged: (value) {
                             checkButtonEnabled();
+                            checkPhone();
                           },
                           hintText: "Masukkan nomor handphone",
                           textInputAction: TextInputAction.next,
@@ -158,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Kode Referral (Opsional)',
+                          'Kata Sandi',
                           style: TextStyle(
                             color: colorScheme.onSurface,
                             fontSize: 14,
@@ -166,38 +169,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(height: 5),
-                        DefaultTextField(
-                          textEditingController: emailText,
+                        DefaultPasswordTextField(
+                          textEditingController: passwordText,
                           onChanged: (value) {
                             checkButtonEnabled();
-                            checkEmail();
+                            checkPassword();
                           },
-                          hintText: "Masukkan kode referral",
-                          textInputAction: TextInputAction.next,
-                          error: emailError,
-                          errorText: "Alamat email tidak valid",
-                          icon: Icons.email_outlined,
+                          hintText: "Masukkan kata sandi",
+                          error: passwordError,
+                          errorText: "kata sandi tidak valid",
                         ),
                         SizedBox(height: 10),
                         RichText(
                           text: TextSpan(
                             text: 'Dengan melanjutkan kamu setuju dengan ',
                             style: TextStyle(
-                                color: ColorsCustom.generalText,
-                                fontSize: 14,
-                                height: 1.5),
+                              color: ColorsCustom.generalText,
+                              fontSize: 14,
+                              height: 1.5,
+                            ),
                             children: <TextSpan>[
                               TextSpan(
-                                  text: 'Syarat & Ketentuan',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: ColorsCustom.primary)),
+                                text: 'Syarat & Ketentuan',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorsCustom.primary,
+                                ),
+                              ),
                               TextSpan(text: " dan "),
                               TextSpan(
-                                  text: 'Kebijakan Privasi',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: ColorsCustom.primary)),
+                                text: 'Kebijakan Privasi',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: ColorsCustom.primary,
+                                ),
+                              ),
                               TextSpan(text: " yang berlaku."),
                             ],
                           ),
@@ -209,18 +215,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       DefaultButton(
-                        onPressed: () {
-                          context.read<RegisterBloc>().add(
-                                RegisterClickEvent(
-                                  registerRequest: RegisterRequest(
-                                      name: "nama",
-                                      email: "nauffff@gmail.com",
-                                      phone: "08080808080",
-                                      password: "password1234"),
-                                ),
-                              );
-                        },
-                        text: "Selanjutnya",
+                        onPressed: (buttonEnabled)
+                            ? () {
+                                context.read<RegisterBloc>().add(
+                                      RegisterClickEvent(
+                                        registerRequest: RegisterRequest(
+                                          name: nameText.text,
+                                          email: emailText.text,
+                                          phone: phoneText.text,
+                                          password: passwordText.text,
+                                        ),
+                                      ),
+                                    );
+                              }
+                            : null,
+                        text: "Daftar",
                       ),
                       SizedBox(height: 12),
                       RichText(
@@ -230,10 +239,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               color: ColorsCustom.generalText, fontSize: 14),
                           children: <TextSpan>[
                             TextSpan(
-                                text: 'Masuk',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: ColorsCustom.primary)),
+                              text: 'Masuk',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: ColorsCustom.primary,
+                              ),
+                            ),
                           ],
                         ),
                       )
@@ -249,13 +260,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void checkButtonEnabled() {
-    if (validateEmail(emailText.text) && passwordText.text.length >= 6) {
+    if (nameText.text.isNotEmpty &&
+        phoneText.text.isNotEmpty &&
+        validateEmail(emailText.text) &&
+        passwordText.text.length >= 6) {
       setState(() {
         buttonEnabled = true;
       });
     } else {
       setState(() {
         buttonEnabled = false;
+      });
+    }
+  }
+
+  void checkName() {
+    if (nameText.text.isNotEmpty) {
+      setState(() {
+        nameError = false;
+      });
+    } else {
+      setState(() {
+        nameError = true;
+      });
+    }
+  }
+
+  void checkPhone() {
+    if (phoneText.text.isNotEmpty) {
+      setState(() {
+        phoneError = false;
+      });
+    } else {
+      setState(() {
+        phoneError = true;
       });
     }
   }

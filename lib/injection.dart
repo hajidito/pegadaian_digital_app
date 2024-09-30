@@ -29,7 +29,9 @@ void dataInjection() {
 
   getIt.registerLazySingleton<PegadaianRepository>(
     () => PegadaianRepository(
-        dio: getIt.get<Dio>(instanceName: instanceDefaultDio)),
+      dio: getIt.get<Dio>(instanceName: instanceDefaultDio),
+      log: getIt.get<Logger>(),
+    ),
   );
 
   getIt.registerLazySingleton<PegadaianPreferences>(
