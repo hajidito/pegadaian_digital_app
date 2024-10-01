@@ -38,6 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           pref.setUserToken(token);
           pref.setUserId(userId);
           pref.setUserLoggedIn(true);
+
           emit(LoginLoadedState(loginResponse: response));
         } else {
           emit(LoginErrorState(message: "Gagal Login"));

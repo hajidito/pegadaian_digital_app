@@ -3,12 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:pegadaian_digital/data/common/dio.dart';
 import 'package:pegadaian_digital/data/common/failure.dart';
+import 'package:pegadaian_digital/data/common/failure_response.dart';
 import 'package:pegadaian_digital/data/model/request/login_request.dart';
 import 'package:pegadaian_digital/data/model/request/register_request.dart';
 import 'package:pegadaian_digital/data/model/response/login_response.dart';
 import 'package:pegadaian_digital/data/model/response/register_response.dart';
 import 'package:pegadaian_digital/data/model/response/user_response.dart';
 import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
+import 'package:pegadaian_digital/injection.dart';
 
 class PegadaianRepository {
   final Dio dio;
@@ -43,7 +45,22 @@ class PegadaianRepository {
           await dio.post("/auth/login", data: loginRequest.toJson());
       log.d("PegadaianRepository: ${response.data}");
 
-      return Right(LoginResponse.fromJson(response.data));
+      if (response.statusCode == 200) {
+        LoginResponse loginResponse = LoginResponse.fromJson(response.data);
+        String token = loginResponse.data?.token ?? "";
+
+        Dio dio = getIt.get<Dio>(instanceName: instanceDefaultDio);
+        dio.options.headers['Content-Type'] = 'application/json';
+        if (token.isNotEmpty) {
+          dio.options.headers["Authorization"] = "Bearer $token";
+        }
+
+        return Right(LoginResponse.fromJson(response.data));
+      } else {
+        Failure failure =
+            ServerFailure("", FailureResponse.fromJson(response.data));
+        return Left(failure);
+      }
     } on DioException catch (e) {
       Failure failure = dioException(e);
       log.e("PegadaianRepository: ${failure.message}");
