@@ -1,4 +1,4 @@
-package com.example.pegadaian_digital
+package com.training_pegadaian.id
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 
