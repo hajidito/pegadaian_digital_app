@@ -53,6 +53,7 @@ dependencies:
   permission_handler: ^10.3.0
   bloc: ^8.1.4
   local_auth: ^2.3.0
+  firebase_core: ^3.6.0
 
 dev_dependencies:
   flutter_test:

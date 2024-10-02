@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "668237377865",
+    "project_id": "training-pegadaian-f2e6b",
+    "storage_bucket": "training-pegadaian-f2e6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668237377865:android:d9d8a0d9e08b8ab56a2a98",
+        "android_client_info": {
+          "package_name": "com.training_pegadaian.id"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtTqDwEER2zpMrU677g56HMn5vJpvlQ1M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
