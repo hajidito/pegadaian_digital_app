@@ -7,20 +7,19 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart' as geolocator;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:pegadaian_digital/helpers/date_formatter.dart';
 import 'package:permission_handler/permission_handler.dart' as permission;
 
 import '../../../helpers/colors_custom.dart';
 
-class Attendance extends StatefulWidget {
-  const Attendance({super.key});
+class AttendanceScreen extends StatefulWidget {
+  const AttendanceScreen({super.key});
 
   @override
-  State<Attendance> createState() => _AttendanceState();
+  State<AttendanceScreen> createState() => _AttendanceScreenState();
 }
 
-class _AttendanceState extends State<Attendance>
+class _AttendanceScreenState extends State<AttendanceScreen>
     with SingleTickerProviderStateMixin {
   Completer<GoogleMapController> controller = Completer();
   late GoogleMapController kcontroller;

@@ -49,5 +49,7 @@
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Need for login section</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Need for Attendance</string>
 </dict>
 </plist>

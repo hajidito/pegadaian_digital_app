@@ -9,6 +9,8 @@ import 'package:logger/logger.dart';
 import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
 import 'package:pegadaian_digital/injection.dart';
 
+import '../../../utils/routes.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -57,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorsCustom.blue,
         onPressed: () {
-          Navigator.of(context).pushNamed('/Attendance');
+          Navigator.pushNamed(context, Routes.ATTENDANCE);
         },
         child: Icon(Icons.calendar_month_outlined, color: ColorsCustom.white),
       ),

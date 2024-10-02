@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/injection.dart';
+import 'package:pegadaian_digital/presentation/feature/attendance/attendance_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/home/home_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/login/login_screen.dart';
@@ -70,6 +71,8 @@ class _MainAppState extends State<MainApp> {
               return MaterialPageRoute(builder: (_) => LoginScreen());
             case Routes.HOME:
               return MaterialPageRoute(builder: (_) => HomeScreen());
+            case Routes.ATTENDANCE:
+              return MaterialPageRoute(builder: (_) => AttendanceScreen());
             default:
               return MaterialPageRoute(
                 builder: (_) {
