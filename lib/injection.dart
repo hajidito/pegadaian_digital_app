@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:pegadaian_digital/data/common/base_url.dart';
@@ -16,17 +18,13 @@ final getIt = GetIt.instance;
 const instanceDefaultDio = "default";
 
 void init() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
   getIt.registerLazySingleton<Dio>(
     () => configureDio(baseUrl),
     instanceName: instanceDefaultDio,
   );
 
   getIt.registerLazySingleton(() => Logger());
-
+  await initFirebaseSetting();
   dataInjection();
   initBloc();
 }
@@ -62,4 +60,32 @@ void initBloc() {
       log: getIt.get<Logger>(),
     ),
   );
+}
+
+Future<void> initFirebaseSetting() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (kDebugMode) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+    }
+
+    if (message.notification != null) {
+      if (kDebugMode) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    }
+  });
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  if (kDebugMode) {
+    print("Handling a background message: ${message.messageId}");
+  }
 }
