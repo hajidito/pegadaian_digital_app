@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
-
-import 'tap_effect.dart';
+import 'package:pegadaian_digital/presentation/widgets/tap_effect.dart';
 
 class DefaultPasswordTextField extends StatefulWidget {
   final TextEditingController textEditingController;

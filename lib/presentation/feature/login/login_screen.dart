@@ -6,12 +6,11 @@ import 'package:local_auth/local_auth.dart';
 import 'package:pegadaian_digital/data/model/request/login_request.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
+import 'package:pegadaian_digital/presentation/widgets/default_button.dart';
+import 'package:pegadaian_digital/presentation/widgets/default_text_field.dart';
+import 'package:pegadaian_digital/presentation/widgets/loading_dialog.dart';
 import 'package:pegadaian_digital/utils/routes.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
-
-import '../../widgets/default_button.dart';
-import '../../widgets/default_text_field.dart';
-import '../../widgets/loading_dialog.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -376,5 +375,48 @@ class _LoginScreenState extends State<LoginScreen> {
         },
       ),
     );
+  }
+
+  void checkButtonEnabled() {
+    if (validateEmail(emailText.text) && passwordText.text.length >= 6) {
+      setState(() {
+        buttonEnabled = true;
+      });
+    } else {
+      setState(() {
+        buttonEnabled = false;
+      });
+    }
+  }
+
+  void checkEmail() {
+    if (validateEmail(emailText.text)) {
+      setState(() {
+        emailError = false;
+      });
+    } else {
+      setState(() {
+        emailError = true;
+      });
+    }
+  }
+
+  void checkPassword() {
+    if (passwordText.text.length >= 6) {
+      setState(() {
+        passwordError = false;
+      });
+    } else {
+      setState(() {
+        passwordError = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    emailText.dispose();
+    passwordText.dispose();
+    super.dispose();
   }
 }
