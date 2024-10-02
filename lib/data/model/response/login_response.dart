@@ -1,5 +1,5 @@
-class RegisterResponse {
-  RegisterResponse({
+class LoginResponse {
+  LoginResponse({
     required this.code,
     required this.message,
     required this.data,
@@ -9,8 +9,8 @@ class RegisterResponse {
   final String? message;
   final Data? data;
 
-  factory RegisterResponse.fromJson(Map<String, dynamic> json) {
-    return RegisterResponse(
+  factory LoginResponse.fromJson(Map<String, dynamic> json) {
+    return LoginResponse(
       code: json["code"],
       message: json["message"],
       data: json["data"] == null ? null : Data.fromJson(json["data"]),
@@ -26,29 +26,45 @@ class RegisterResponse {
 
 class Data {
   Data({
+    required this.user,
+    required this.token,
+  });
+
+  final User? user;
+  final String? token;
+
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      user: json["user"] == null ? null : User.fromJson(json["user"]),
+      token: json["token"],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "user": user?.toJson(),
+        "token": token,
+      };
+}
+
+class User {
+  User({
     required this.userId,
     required this.name,
     required this.email,
     required this.phoneNumber,
-    required this.password,
-    required this.createdAt,
   });
 
   final String? userId;
   final String? name;
   final String? email;
   final String? phoneNumber;
-  final String? password;
-  final int? createdAt;
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
       userId: json["user_id"],
       name: json["name"],
       email: json["email"],
       phoneNumber: json["phone_number"],
-      password: json["password"],
-      createdAt: json["created_at"],
     );
   }
 
@@ -57,7 +73,5 @@ class Data {
         "name": name,
         "email": email,
         "phone_number": phoneNumber,
-        "password": password,
-        "created_at": createdAt,
       };
 }

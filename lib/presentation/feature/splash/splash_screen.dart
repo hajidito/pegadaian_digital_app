@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pegadaian_digital/presentation/feature/home/home_screen.dart';
-import 'package:pegadaian_digital/presentation/feature/onboarding/onboarding_screen.dart';
+import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
+import 'package:pegadaian_digital/injection.dart';
+import 'package:pegadaian_digital/utils/routes.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -34,20 +34,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> initLocal() async {
-    final prefs = await SharedPreferences.getInstance();
-    bool checkIsLogin = prefs.getBool("is_login") ?? false;
-
+    PegadaianPreferences pref = getIt.get<PegadaianPreferences>();
+    bool isUserLoggedIn = pref.isUserLoggedIn();
     setState(() {
-      isLogin = checkIsLogin;
+      isLogin = isUserLoggedIn;
     });
   }
 
   void checkNavigation() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-          builder: (_) =>
-              isLogin ? const HomeScreen() : const OnboardingScreen()),
-    );
+    String route = (isLogin) ? Routes.HOME : Routes.ONBOARDING;
+    Navigator.pushReplacementNamed(context, route);
   }
 
   @override
