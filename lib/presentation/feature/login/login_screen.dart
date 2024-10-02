@@ -12,7 +12,6 @@ import 'package:pegadaian_digital/presentation/widgets/loading_dialog.dart';
 import 'package:pegadaian_digital/utils/routes.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -77,49 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(noBiometricSnackbar);
     }
-  }
-
-  void checkButtonEnabled() {
-    if (validateEmail(emailText.text) && passwordText.text.length >= 6) {
-      setState(() {
-        buttonEnabled = true;
-      });
-    } else {
-      setState(() {
-        buttonEnabled = false;
-      });
-    }
-  }
-
-  void checkEmail() {
-    if (validateEmail(emailText.text)) {
-      setState(() {
-        emailError = false;
-      });
-    } else {
-      setState(() {
-        emailError = true;
-      });
-    }
-  }
-
-  void checkPassword() {
-    if (passwordText.text.length >= 6) {
-      setState(() {
-        passwordError = false;
-      });
-    } else {
-      setState(() {
-        passwordError = true;
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    emailText.dispose();
-    passwordText.dispose();
-    super.dispose();
   }
 
   @override

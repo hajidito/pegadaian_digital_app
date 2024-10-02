@@ -5,6 +5,7 @@ import 'package:pegadaian_digital/presentation/feature/home/widgets/custom_botto
 import 'package:pegadaian_digital/presentation/feature/home/widgets/gold_menu.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/menu_grid.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/top_bar.dart';
+import 'package:pegadaian_digital/utils/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: CustomBottomNav(),
       floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.of(context).pushNamed('/Attendance');
+        Navigator.of(context).pushNamed(Routes.ATTENDANCE);
       }),
     );
   }
