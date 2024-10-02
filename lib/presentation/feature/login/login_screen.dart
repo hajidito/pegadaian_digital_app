@@ -6,12 +6,13 @@ import 'package:local_auth/local_auth.dart';
 import 'package:pegadaian_digital/data/model/request/login_request.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
-import 'package:pegadaian_digital/presentation/widget/loading_dialog.dart';
 import 'package:pegadaian_digital/utils/routes.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
 
-import '../../widget/default_button.dart';
-import '../../widget/default_text_field.dart';
+import '../../widgets/default_button.dart';
+import '../../widgets/default_text_field.dart';
+import '../../widgets/loading_dialog.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

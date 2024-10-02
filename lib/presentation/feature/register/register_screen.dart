@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pegadaian_digital/data/model/request/register_request.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/register/bloc/register_bloc.dart';
-import 'package:pegadaian_digital/presentation/widget/default_button.dart';
-import 'package:pegadaian_digital/presentation/widget/default_password_text_field.dart';
-import 'package:pegadaian_digital/presentation/widget/default_text_field.dart';
-import 'package:pegadaian_digital/presentation/widget/loading_dialog.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
+
+import '../../widgets/default_button.dart';
+import '../../widgets/default_password_text_field.dart';
+import '../../widgets/default_text_field.dart';
+import '../../widgets/loading_dialog.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
