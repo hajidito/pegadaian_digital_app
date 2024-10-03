@@ -9,6 +9,8 @@ import 'package:pegadaian_digital/presentation/widget/default_text_field.dart';
 import 'package:pegadaian_digital/presentation/widget/loading_dialog.dart';
 import 'package:pegadaian_digital/utils/validator.dart';
 
+import '../../../utils/routes.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -81,8 +83,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               if (_dialogContext != null && _dialogContext!.mounted) {
                 Navigator.pop(_dialogContext!);
               }
-
               ScaffoldMessenger.of(context).showSnackBar(successSnackbar);
+
+              Navigator.pushNamedAndRemoveUntil(
+                  context, Routes.HOME, (Route<dynamic> route) => false);
             }
 
             if (state is RegisterErrorState) {
