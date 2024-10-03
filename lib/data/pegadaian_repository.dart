@@ -81,8 +81,13 @@ class PegadaianRepository {
       String? userId = pref.getUserId();
       final response = await dio.get("/auth/users/$userId");
       log.d("PegadaianRepository: ${response.data}");
-
-      return Right(UserResponse.fromJson(response.data));
+      if(response.statusCode == 200){
+        return Right(UserResponse.fromJson(response.data));
+      }
+      {
+        return Left(ConnectionTimeoutFailure(
+            response.statusMessage, FailureResponse()));
+      }
     } on DioException catch (e) {
       Failure failure = dioException(e);
       log.e("PegadaianRepository: ${failure.message}");

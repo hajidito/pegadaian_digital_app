@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pegadaian_digital/presentation/feature/home/bloc/home_bloc.dart';
 
 import '../../../../helpers/colors_custom.dart';
+import '../../../../utils/routes.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({super.key});
@@ -87,8 +88,14 @@ class TopBar extends StatelessWidget {
             ),
           );
         }
-
-        return Container();
+        if (state is HomeErrorState){
+          Navigator.pushNamed(context, Routes.LOGIN);
+          return Container();
+        }
+        if (state is HomeLoadingState){
+          return Container();
+        }
+          return Container();
       },
     );
   }
