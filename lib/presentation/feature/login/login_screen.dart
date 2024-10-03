@@ -13,7 +13,6 @@ import '../../widgets/default_button.dart';
 import '../../widgets/default_text_field.dart';
 import '../../widgets/loading_dialog.dart';
 
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 

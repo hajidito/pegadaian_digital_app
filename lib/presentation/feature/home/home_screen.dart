@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/history/history_screen.dart';
@@ -36,6 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
     Logger().d("HOMESCREEN $isUserLoggedIn || $token");
   }
 
+  void initFirebase() async {
+    FirebaseMessaging.instance.getToken().then((value) {
+      Logger().d("TOKEN $value");
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -46,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ("assets/images/svg/profile.svg", "Profile", HistoryScreen()),
     ];
     initLocal();
+    initFirebase();
   }
 
   @override

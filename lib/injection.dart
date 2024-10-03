@@ -13,6 +13,8 @@ import 'package:pegadaian_digital/presentation/feature/register/bloc/register_bl
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'firebase_options.dart';
+import 'utils/firebase_utils.dart';
+import 'utils/notification_plugin.dart';
 
 final getIt = GetIt.instance;
 const instanceDefaultDio = "default";
@@ -67,6 +69,8 @@ Future<void> initFirebaseSetting() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  notificationPlugin.init();
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -79,13 +83,12 @@ Future<void> initFirebaseSetting() async {
       if (kDebugMode) {
         print('Message also contained a notification: ${message.notification}');
       }
+      FirebaseUtils.firebaseHandler(message);
     }
   });
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  if (kDebugMode) {
-    print("Handling a background message: ${message.messageId}");
-  }
+  FirebaseUtils.firebaseHandler(message);
 }
