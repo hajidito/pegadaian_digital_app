@@ -105,7 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
             ScaffoldMessenger.of(context).showSnackBar(successSnackbar);
 
-            Navigator.pushReplacementNamed(context, Routes.HOME);
+            Navigator.pushNamedAndRemoveUntil(
+                context, Routes.HOME, (Route<dynamic> route) => false);
           }
 
           if (state is LoginErrorState) {
