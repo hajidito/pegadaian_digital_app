@@ -3,13 +3,8 @@ import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/helpers/date_formatter.dart';
 
 class ListHistory extends StatelessWidget {
-  const ListHistory(
-      {super.key,
-      required this.isToday,
-      required this.checkIn,
-      required this.checkOut});
+  const ListHistory({super.key, required this.checkIn, required this.checkOut});
 
-  final bool isToday;
   final DateTime checkIn;
   final DateTime checkOut;
 

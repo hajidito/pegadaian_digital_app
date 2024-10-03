@@ -1,16 +1,13 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/presentation/feature/history/history_screen.dart';
+import 'package:pegadaian_digital/presentation/feature/home/bloc/home_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/custom_bottom_nav.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/gold_menu.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/menu_grid.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/top_bar.dart';
-import 'package:logger/logger.dart';
-import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
-import 'package:pegadaian_digital/injection.dart';
-
-import '../../../utils/routes.dart';
+import 'package:pegadaian_digital/utils/routes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,30 +27,16 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> initLocal() async {
-    PegadaianPreferences pref = getIt.get<PegadaianPreferences>();
-    bool isUserLoggedIn = pref.isUserLoggedIn();
-    String token = pref.getUserToken() ?? "";
-    Logger().d("HOMESCREEN $isUserLoggedIn || $token");
-  }
-
-  void initFirebase() async {
-    FirebaseMessaging.instance.getToken().then((value) {
-      Logger().d("TOKEN $value");
-    });
-  }
-
   @override
   void initState() {
     super.initState();
+    context.read<HomeBloc>().add(GetUserEvent());
     menu = [
       ("assets/images/svg/home.svg", "Beranda", homeBody()),
       ("assets/images/svg/history.svg", "Riwayat", HistoryScreen()),
       ("assets/images/svg/notification.svg", "Notifikasi", HistoryScreen()),
       ("assets/images/svg/profile.svg", "Profile", HistoryScreen()),
     ];
-    initLocal();
-    initFirebase();
   }
 
   @override

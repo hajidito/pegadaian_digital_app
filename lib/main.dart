@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/injection.dart';
 import 'package:pegadaian_digital/presentation/feature/attendance/attendance_screen.dart';
+import 'package:pegadaian_digital/presentation/feature/attendance/bloc/attendance_bloc.dart';
+import 'package:pegadaian_digital/presentation/feature/history/bloc/history_bloc.dart';
+import 'package:pegadaian_digital/presentation/feature/home/bloc/home_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/home/home_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/login/login_screen.dart';
@@ -41,6 +44,15 @@ class _MainAppState extends State<MainApp> {
         BlocProvider<LoginBloc>(
           create: (BuildContext context) => getIt.get<LoginBloc>(),
         ),
+        BlocProvider<HomeBloc>(
+          create: (BuildContext context) => getIt.get<HomeBloc>(),
+        ),
+        BlocProvider<AttendanceBloc>(
+          create: (BuildContext context) => getIt.get<AttendanceBloc>(),
+        ),
+        BlocProvider<HistoryBloc>(
+          create: (BuildContext context) => getIt.get<HistoryBloc>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Pegadaian Digital',
@@ -54,9 +66,10 @@ class _MainAppState extends State<MainApp> {
             centerTitle: false,
             iconTheme: IconThemeData(color: ColorsCustom.primary),
             titleTextStyle: TextStyle(
-                color: ColorsCustom.black,
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
+              color: ColorsCustom.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           useMaterial3: true,
         ),
@@ -78,7 +91,7 @@ class _MainAppState extends State<MainApp> {
                 builder: (_) {
                   return const Scaffold(
                     body: Center(
-                      child: Text('Page not found :('),
+                      child: Text('Page not found'),
                     ),
                   );
                 },
