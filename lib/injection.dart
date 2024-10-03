@@ -5,7 +5,10 @@ import 'package:pegadaian_digital/data/common/base_url.dart';
 import 'package:pegadaian_digital/data/common/dio.dart';
 import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
 import 'package:pegadaian_digital/data/pegadaian_repository.dart';
+import 'package:pegadaian_digital/features/register/bloc/register_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'features/login/bloc/login_bloc.dart';
 
 final getIt = GetIt.instance;
 const instanceDefaultDio = "default";
@@ -19,6 +22,7 @@ void init() async {
   getIt.registerLazySingleton(() => Logger());
 
   dataInjection();
+  initBloc();
 }
 
 void dataInjection() {
@@ -34,5 +38,22 @@ void dataInjection() {
 
   getIt.registerLazySingleton<PegadaianPreferences>(
     () => PegadaianPreferences(preferences: getIt.get<SharedPreferences>()),
+  );
+}
+
+void initBloc() {
+  getIt.registerLazySingleton<RegisterBloc>(
+          () => RegisterBloc(
+              pegadaianRepository: getIt.get<PegadaianRepository>(),
+              log: getIt.get<Logger>()
+          )
+  );
+
+  getIt.registerLazySingleton<LoginBloc>(
+        () => LoginBloc(
+            pegadaianRepository: getIt.get<PegadaianRepository>(),
+            pref: getIt.get<PegadaianPreferences>(),
+            log: getIt.get<Logger>()
+    )
   );
 }
