@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: CustomBottomNav(),
       floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.of(context).pushNamed(Routes.ATTENDANCE);
+        Navigator.pushNamed(context, Routes.ATTENDANCE);
       }),
     );
   }

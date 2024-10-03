@@ -5,6 +5,7 @@ import 'package:pegadaian_digital/data/common/base_url.dart';
 import 'package:pegadaian_digital/data/common/dio.dart';
 import 'package:pegadaian_digital/data/pegadaian_preferences.dart';
 import 'package:pegadaian_digital/data/pegadaian_repository.dart';
+import 'package:pegadaian_digital/presentation/feature/attendance/bloc/attendance_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/home/bloc/home_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/register/bloc/register_bloc.dart';
@@ -60,6 +61,13 @@ void initBloc() {
 
   getIt.registerLazySingleton<HomeBloc>(
     () => HomeBloc(
+      pegadaianRepository: getIt.get<PegadaianRepository>(),
+      log: getIt.get<Logger>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<AttendanceBloc>(
+    () => AttendanceBloc(
       pegadaianRepository: getIt.get<PegadaianRepository>(),
       log: getIt.get<Logger>(),
     ),
