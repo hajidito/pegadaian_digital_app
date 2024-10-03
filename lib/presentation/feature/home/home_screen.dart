@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pegadaian_digital/helpers/colors_custom.dart';
+import 'package:pegadaian_digital/presentation/feature/history/history_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/home/bloc/home_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/custom_bottom_nav.dart';
 import 'package:pegadaian_digital/presentation/feature/home/widgets/gold_menu.dart';
@@ -15,10 +17,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<(String icon, String label, Widget page)> menu = [];
+
+  int selectedIndex = 0;
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     context.read<HomeBloc>().add(GetUserEvent());
+    menu = [
+      ("assets/images/svg/home.svg", "Beranda", homeBody()),
+      ("assets/images/svg/history.svg", "Riwayat", HistoryScreen()),
+      ("assets/images/svg/notification.svg", "Notifikasi", HistoryScreen()),
+      ("assets/images/svg/profile.svg", "Profile", HistoryScreen()),
+    ];
   }
 
   @override
