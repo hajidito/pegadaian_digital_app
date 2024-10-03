@@ -4,6 +4,7 @@ import 'package:pegadaian_digital/helpers/colors_custom.dart';
 import 'package:pegadaian_digital/injection.dart';
 import 'package:pegadaian_digital/presentation/feature/attendance/attendance_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/attendance/bloc/attendance_bloc.dart';
+import 'package:pegadaian_digital/presentation/feature/history/bloc/history_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/home/bloc/home_bloc.dart';
 import 'package:pegadaian_digital/presentation/feature/home/home_screen.dart';
 import 'package:pegadaian_digital/presentation/feature/login/bloc/login_bloc.dart';
@@ -48,6 +49,9 @@ class _MainAppState extends State<MainApp> {
         ),
         BlocProvider<AttendanceBloc>(
           create: (BuildContext context) => getIt.get<AttendanceBloc>(),
+        ),
+        BlocProvider<HistoryBloc>(
+          create: (BuildContext context) => getIt.get<HistoryBloc>(),
         ),
       ],
       child: MaterialApp(

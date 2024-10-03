@@ -9,6 +9,7 @@ import 'package:pegadaian_digital/data/model/request/login_request.dart';
 import 'package:pegadaian_digital/data/model/request/register_request.dart';
 import 'package:pegadaian_digital/data/model/request/update_absences_request.dart';
 import 'package:pegadaian_digital/data/model/response/absences_response.dart';
+import 'package:pegadaian_digital/data/model/response/history_response.dart';
 import 'package:pegadaian_digital/data/model/response/login_response.dart';
 import 'package:pegadaian_digital/data/model/response/register_response.dart';
 import 'package:pegadaian_digital/data/model/response/update_absences_response.dart';
@@ -119,6 +120,22 @@ class PegadaianRepository {
       log.d("PegadaianRepository: ${response.data}");
 
       return Right(UpdateAbsencesResponse.fromJson(response.data));
+    } on DioException catch (e) {
+      Failure failure = dioException(e);
+      log.e("PegadaianRepository: ${failure.message}");
+      return Left(failure);
+    } catch (e) {
+      log.e("PegadaianRepository $e");
+      return Left(UnknownFailure(null, null));
+    }
+  }
+
+  Future<Either<Failure, HistoryResponse>> getHistory() async {
+    try {
+      final response = await dio.get("/absences");
+      log.d("PegadaianRepository: ${response.data}");
+
+      return Right(HistoryResponse.fromJson(response.data));
     } on DioException catch (e) {
       Failure failure = dioException(e);
       log.e("PegadaianRepository: ${failure.message}");
