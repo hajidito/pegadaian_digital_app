@@ -86,9 +86,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget _buildListView(BuildContext context, List<Item> list) {
     return ListView.separated(
       padding: EdgeInsets.all(0),
-      physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: list.length,
+      scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, index) {
         Item selected = list[index];
         return ListHistory(
@@ -99,7 +99,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       },
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(
-          height: 20,
+          height: 10,
         );
       },
     );
